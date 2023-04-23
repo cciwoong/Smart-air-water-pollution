@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+// Options for the gRPC
+option java_multiple_files = true;
+option java_package = "service.airpollution";
+option java_outer_classname = "AirPollutionServiceImpl";
+
+package airpollution;
+
+// Service Definition
+service AirPollution {
+  rpc AirPollutionCity (CityRequest) returns (LevelReply) {}
+  rpc AirPollutionLevel (LevelRequest) returns (CityReply) {}
+  rpc AirPollutionMonth (MonthRequest) returns (stream CityLevelReply){}
+}
+
+// Define the messages
+message CityRequest {
+  string location = 1;
+}
+
+message LevelReply {
+  string AirPollutionLevel = 1;
+}
+
+message LevelRequest {
+  string AirPollutionLevel = 1;
+}
+
+message CityReply {
+  string location = 1;
+}
+
+message MonthRequest {
+  string AirPollutionMonth = 1;
+}
+
+message CityLevelReply {
+  string location = 1;
+  string AirPollutionLevel = 2; 
+}

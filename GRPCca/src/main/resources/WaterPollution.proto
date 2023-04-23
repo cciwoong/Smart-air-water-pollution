@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+// Options for the gRPC
+option java_multiple_files = true;
+option java_package = "service.waterpollution";
+option java_outer_classname = "WaterPollutionServiceImpl";
+
+package waterpollution;
+
+// Service Definition
+service WaterPollution {
+  rpc WaterPollutionCity (CityRequest) returns (LevelReply) {}
+  rpc WaterPollutionLevel (LevelRequest) returns (CityReply) {}
+  rpc WaterPollutionMonth (MonthRequest) returns (stream CityLevelReply){}
+}
+
+// Define the messages
+message CityRequest {
+  string location = 1;
+}
+
+message LevelReply {
+  string WaterPollutionLevel = 1;
+}
+
+message LevelRequest {
+  string WaterPollutionLevel = 1;
+}
+
+message CityReply {
+  string location = 1;
+}
+
+message MonthRequest {
+  string WaterPollutionMonth = 1;
+}
+
+message CityLevelReply {
+  string location = 1;
+  string WaterPollutionLevel = 2; 
+}

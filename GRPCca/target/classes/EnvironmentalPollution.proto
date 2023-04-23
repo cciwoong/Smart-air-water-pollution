@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+// Options for the gRPC
+option java_multiple_files = true;
+option java_package = "service.environmentalpollution";
+option java_outer_classname = "EnvironmentalPollutionServiceImpl";
+
+package environmentalpollution;
+
+// Service Definition
+service EnvironmentalPollution {
+
+  // Client Streaming RPC method
+  rpc EnvironmentalEvaluation (stream EnvironmentalEvaluationRequest) returns (EnvironmentalEvaluationReply) {}
+  
+  // Bidirectional Streaming RPC method
+  rpc DecideLocation (stream DecideLocationRequest) returns (stream DecideLocationReply) {}
+}
+ // Define the messages
+  message EnvironmentalEvaluationRequest{
+  	 string EnvironmentalPollutionLevel = 1;
+  }
+  
+  message EnvironmentalEvaluationReply{
+  	 string Grade = 1;
+  }
+  
+  message DecideLocationRequest{
+  	 string Location = 1;
+  }
+  
+  message DecideLocationReply{
+  	 string Grade = 1;
+  }
